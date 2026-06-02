@@ -1,0 +1,54 @@
+Humpback whales are known for their complex songs and exciting jumps out of the water. 
+[humpback_sing.jpg |]
+They are also some of the most creative hunters in the ocean. 
+These whales use bubbles to trap and catch fish, in a hunting technique called bubble net feeding.
+[humpback_bubble_4.jpg |]
+Here's how it works. 
+A whale dives below a school of fish. 
+It swims in a slow upward spiral, blowing air through its blowhole. 
+The bubbles rise to the surface and form a curtain. 
+[humpback_bubble_3.jpg |]
+It is like a net made of air, and the fish trapped inside can't escape. 
+Then the whale lunges up through the middle with its mouth open wide. 
+[humpback_bubble_2.jpg |]
+It swallows an enormous mouthful of fish in one gulp.
+Some humpback whales do this alone, but others hunt in teams. 
+[humpback_bubble_1.jpg |]
+When they work together, they take on different roles. 
+Some whales produce the bubbles, and others herd the fish toward the center.
+[humpback_bubble_6.jpg|]
+Some even make loud calls that may help herd the fish tighter. 
+Each whale has a role, and the whole team has to coordinate for the hunt to succeed.
+[humpback_bubble_7.jpg|]
+Scientists tracked hundreds of individual humpback whales in British Columbia, Canada, over twenty years.
+Humpback whales have distinctive tail markings which scientists used to tell individual whales apart. 
+[humpback_tail.jpg|]
+The scientists tracked which whales spent time together.
+They also noted which whales knew how to bubble net feed and when they fed alone or together.
+[three_humpbacks.jpg|]
+They found strong evidence that the bubble net technique spreads through social contact. 
+Whales that spent more time together were far more likely to both use it. 
+[humpback_bubble_5.jpg |]
+This suggests that bubble net feeding is not something whales are born knowing or that they invent on their own. 
+[humpback_calf.jpg|]
+It is a skill that is learned by watching and copying other whales. 
+This is similar to how you might learn how to cook by watching family members in the kitchen. 
+[humpback_bubble_8.jpg|]
+
+-------------
+Information and text adapted from:
+https://royalsocietypublishing.org/doi/10.1098/rspb.2025.2409
+
+--- Summary statistics ---
+Word length (chars):
+  n=306, mean=4.418, sd=1.999, median=4.000, min=1.000, max=10.000
+Zipf frequency:
+  n=306, mean=5.715, sd=1.294, median=5.810, min=2.110, max=7.730
+Surprisal (bits, GPT-2, excl. word 1):
+  n=305, mean=5.386, sd=3.975, median=4.527, min=0.002, max=18.331
+
+--- Pearson correlations (words 2+) ---
+  length ~ frequency:  r = -0.737
+  length ~ surprisal:  r = +0.429
+  frequency ~ surprisal: r = -0.535
+

@@ -1,0 +1,59 @@
+Tyrannosaurus rex is one of the most famous dinosaurs ever. 
+[trex_recon.jpg| by Nobu Tamura (CC-BY-SA)] 
+For such a huge, powerful hunter, it had surprisingly tiny arms.
+T-rex was about 40 feet long and could weigh as much as 9 tons. 
+Its arms were only about 3 feet long. 
+[trex_forelimb.jpeg | By Eduard Solà (CC-BY)]
+With arms that short, it couldn't even reach its own mouth. 
+Why would such a fierce predator have arms that seem almost useless?
+[trex_skeleton_2.jpg| by AbstractionBlue (CC-BY)]
+Scientists have known for decades that T-rex isn't the only dinosaur like this. 
+Fossils from several other dinosaur families show the same pattern. 
+[Carnotaurus_skeleton.jpg | by https://www.flickr.com/photos/23992608@N06/ (CC-BY)]
+They too had tiny arms, giant bodies, and huge heads with powerful jaws. 
+These groups were only distantly related, yet these same features evolved independently multiple times. 
+What could have driven dinosaurs to separately develop small arms so many times?
+[Carnotaurus.png | by Fred Wierum (CC-BY-SA)]
+To understand why, scientists measured skull sizes alongside arm sizes across many different species. 
+[fossil.jpg |]
+A clear pattern emerged. 
+Where skulls grew bigger and more robust, the arms tended to get shorter and the overall body size increased. 
+[trex_skull.jpg|]
+One idea is that as the prey animals got bigger and tougher, a powerful bite became more and more important. 
+[Stegosuraus_TD.png | by TotalDino (CC-BY)]
+Over millions of years, skulls grew larger and jaws grew more powerful. 
+As the skull became the main tool for catching prey, the arms were no longer needed. 
+[trex_head.jpg|]
+Growing large arms takes energy, so gradually the arms got smaller and smaller.
+Not all dinosaurs followed this path. Plant-eating dinosaurs kept their smaller heads and longer arms. 
+[herbivore.png|]
+So did dinosaurs that hunted in different ways. 
+[Compsognathus_BW.jpeg | by Nobu Tamura (CC-BY-SA)]
+T-rex's tiny arms may look strange, but they weren't a flaw.
+By that point, T-rex's jaws had simply taken over the job. 
+[trex_skull.jpg|]
+The tiny arms were a consequence of the skull becoming T-rex's main weapon. 
+It was becoming one of the most powerful predators on Earth.
+[trex_recon.jpg| by Nobu Tamura (CC-BY-SA)] 
+
+-------------
+Information and text adapted from:
+https://royalsocietypublishing.org/rspb/article/293/2071/20260528/481779/Drivers-and-mechanisms-of-convergent-forelimb
+https://en.wikipedia.org/wiki/Tyrannosaurus
+
+--- Summary statistics ---
+Word length (chars):
+  n=300, mean=4.780, sd=2.309, median=4.000, min=1.000, max=13.000
+Zipf frequency:
+  n=300, mean=5.557, sd=1.264, median=5.575, min=2.340, max=7.730
+Surprisal (bits, GPT-2, excl. word 1):
+  n=299, mean=5.436, sd=3.751, median=5.004, min=0.005, max=20.570
+
+--- Pearson correlations (words 2+) ---
+  length ~ frequency:  r = -0.674
+  length ~ surprisal:  r = +0.341
+  frequency ~ surprisal: r = -0.429
+
+
+https://en.wikipedia.org/wiki/Tyrannosaurus#/media/File:Tyrannosaurus-rex-Profile-steveoc86_(coloured).png/2
+https://en.wikipedia.org/wiki/Tyrannosaurus#/media/File:Sue_TRex_Skull_Full_Frontal.JPG
