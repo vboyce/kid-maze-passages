@@ -1,0 +1,368 @@
+import { JsPsych, JsPsychPlugin, ParameterType, TrialType } from "jspsych";
+import {
+  groupText,
+} from "./maze_helper.js";
+
+const info = {
+  name: "maze",
+  parameters: {
+    correct: {
+      type: ParameterType.STRING,
+      pretty_name: "Stimulus",
+      default: undefined,
+      description: "The string to be displayed in Maze style",
+    },
+    distractor: {
+      type: ParameterType.STRING,
+      pretty_name: "Stimulus",
+      default: undefined,
+      description: "The string to be displayed in Maze style",
+    },
+    prompt: {
+      type: ParameterType.STRING,
+      pretty_name: "Prompt",
+      default: undefined,
+      description: "html for the top",
+    },
+    order: {
+      type: ParameterType.ARRAY,
+      pretty_name: "Order",
+      default: null,
+      description: "Array of 0/1 controlling left/right placement of correct word per position",
+    },
+    redo: {
+      type: ParameterType.BOOL,
+      pretty_name: "Redo",
+      default: true,
+      description: "Whether to allow retrying after a wrong answer",
+    },
+    delay: {
+      type: ParameterType.FLOAT,
+      pretty_name: "Delay",
+      default: 500,
+      description: "Time to wait after a mistake before registering next keypress",
+    },
+    normal_message: {
+      type: ParameterType.STRING,
+      pretty_name: "Normal message",
+      default: "",
+      description: "What to display normally",
+    },
+    error_message: {
+      type: ParameterType.STRING,
+      pretty_name: "Error message",
+      default: "<p>Oops! Just a second...</p>",
+      description: "What to display on mistakes during delay",
+    },
+    redo_message: {
+      type: ParameterType.STRING,
+      pretty_name: "Redo message",
+      default: "<p>Try again!</p>",
+      description: "What to display post mistake once keypresses will record",
+    },
+    on_word_wrong: {
+      type: ParameterType.FUNCTION,
+      pretty_name: "On word wrong",
+      default: null,
+      description:
+        "Called on each wrong selection with {wordIndex, wordsSelected}. " +
+        "Return HTML to replace the redo message, or null/undefined to use the default.",
+    },
+    trial_duration: {
+      type: ParameterType.FLOAT,
+      pretty_name: "The maximum stimulus duration",
+      default: -1,
+      description: "The maximum amount of time a trial lasts.",
+    },
+    choice_left: {
+      type: ParameterType.KEYCODE,
+      pretty_name: "Choice Left",
+      default: ["e"],
+      description: "The keys that select the left-side word.",
+    },
+    choice_right: {
+      type: ParameterType.KEYCODE,
+      pretty_name: "Choice Right",
+      default: ["i"],
+      description: "The keys that select the right-side word.",
+    },
+    background_color: {
+      type: ParameterType.STRING,
+      pretty_name: "Background color",
+      default: "rgb(255,255,255)",
+      description: 'Background color, e.g. "rgb(230,230,230)" or "gray"',
+    },
+    font_color: {
+      type: ParameterType.STRING,
+      pretty_name: "Font color",
+      default: "rgb(0,0,0)",
+      description: 'Text color, e.g. "rgb(0,0,0)"',
+    },
+    font_family: {
+      type: ParameterType.STRING,
+      pretty_name: "Font family",
+      default: "Times New Roman",
+      description: "Font family for word display",
+    },
+    font_size: {
+      type: ParameterType.INT,
+      pretty_name: "Font size",
+      default: 60,
+      description: "Base font size in pixels (auto-scaled down for long words)",
+    },
+    width: {
+      type: ParameterType.INT,
+      pretty_name: "Width",
+      default: 1000,
+      description: "Width of the word display container in pixels; also controls gap between words.",
+    },
+    height: {
+      type: ParameterType.INT,
+      pretty_name: "Height",
+      default: 100,
+      description: "Height of the word display container in pixels.",
+    },
+    grouping_string: {
+      type: ParameterType.STRING,
+      pretty_name: "Grouping string",
+      default: null,
+      description:
+        "Regex pattern to split stimulus into multi-word groups. If null, splits on whitespace.",
+    },
+    on_word_correct: {
+      type: ParameterType.FUNCTION,
+      pretty_name: "On word correct",
+      default: null,
+      description:
+        "Called after each correct word selection with {wordIndex, wordsSelected}. " +
+        "Return HTML to replace the status area, or null/undefined to leave it unchanged.",
+    },
+  },
+};
+
+function createTextArea(display_element) {
+  let div = document.createElement("div");
+  display_element.appendChild(div);
+  div.style.height = "300px";
+  div.style.display = "flex";
+  div.style.justifyContent = "center";
+  div.style.alignContent = "center";
+  div.id = "feedback";
+  return div;
+}
+
+function createWordDisplay(display_element, trial_pars) {
+  let container = document.createElement("div");
+  container.id = "maze-word-container";
+  container.style.display = "flex";
+  container.style.justifyContent = "center";
+  container.style.alignItems = "center";
+  container.style.gap = (trial_pars.width * 0.1) + "px";
+  container.style.fontFamily = trial_pars.font_family;
+  container.style.fontSize = trial_pars.font_size + "px";
+  container.style.color = trial_pars.font_color;
+  container.style.backgroundColor = trial_pars.background_color;
+  container.style.width = trial_pars.width + "px";
+  container.style.height = trial_pars.height + "px";
+  container.style.margin = "0 auto";
+
+  let leftWord = document.createElement("span");
+  leftWord.id = "maze-left-word";
+  leftWord.style.flex = "1";
+  leftWord.style.textAlign = "right";
+  container.appendChild(leftWord);
+
+  let rightWord = document.createElement("span");
+  rightWord.id = "maze-right-word";
+  rightWord.style.flex = "1";
+  rightWord.style.textAlign = "left";
+  container.appendChild(rightWord);
+  display_element.appendChild(container);
+  // Return element references so callers don't need to query by id.
+  return { leftWordEl: leftWord, rightWordEl: rightWord };
+}
+
+class MazePlugin {
+  static info = info;
+
+  constructor(jsPsych) {
+    this.jsPsych = jsPsych;
+  }
+
+  trial(display_element, trial_pars) {
+    // --- all mutable state is local to this trial invocation ---
+    let group_index = 0;
+    let first = true;
+    let reactiontimes = [];
+    let cumulative_rts = [];
+    let cumulative_rt = 0;
+    let responses = [];
+
+    const old_html = display_element.innerHTML;
+    const font_size = trial_pars.font_size;
+    const valid_keys = trial_pars.choice_left.concat(trial_pars.choice_right);
+    const left_keys = trial_pars.choice_left;
+    const right_keys = trial_pars.choice_right;
+    const error_message = trial_pars.error_message;
+    const redo_message = trial_pars.redo_message;
+    const normal_message = trial_pars.normal_message;
+    const redo = trial_pars.redo;
+    const delay = trial_pars.delay;
+
+    if (trial_pars.correct == null) throw new Error("MazePlugin: 'correct' is null — has the distractor generator been run?");
+    if (trial_pars.distractor == null) throw new Error("MazePlugin: 'distractor' is null — has the distractor generator been run?");
+    const correct = groupText(trial_pars.correct, trial_pars.grouping_string);
+    const distractor = groupText(trial_pars.distractor, trial_pars.grouping_string);
+    console.assert(
+      correct.length === distractor.length,
+      "Correct and distractor do not have the same length"
+    );
+
+    let order;
+    if (trial_pars.order === null) {
+      order = correct.map(() => Math.round(Math.random()));
+    } else {
+      order = trial_pars.order;
+    }
+    console.assert(
+      correct.length === order.length,
+      "Order is not the same length as correct and distractor"
+    );
+
+    // --- setup display ---
+    display_element.innerHTML = "<div id='status'>" + trial_pars.prompt + "</div>";
+    const { leftWordEl, rightWordEl } = createWordDisplay(display_element, trial_pars);
+    const feedbackDiv = createTextArea(display_element);
+    feedbackDiv.innerHTML = normal_message;
+
+    // --- helpers that close over local state ---
+    function scaledFontSize(word) {
+      if (word.length > 12) {
+        return Math.floor(font_size * 12 / word.length) + "px";
+      }
+      return font_size + "px";
+    }
+
+    function drawStimulus(idx) {
+      let leftWord, rightWord;
+      if (order[idx] === 0) {
+        leftWord = correct[idx];
+        rightWord = distractor[idx];
+      } else {
+        leftWord = distractor[idx];
+        rightWord = correct[idx];
+      }
+      leftWordEl.textContent = leftWord;
+      leftWordEl.style.fontSize = scaledFontSize(leftWord);
+      rightWordEl.textContent = rightWord;
+      rightWordEl.style.fontSize = scaledFontSize(rightWord);
+    }
+
+    const trial_data = {
+      rt: [],
+      cumrt: [],
+      correct: [],
+      words: [],
+      distractors: [],
+      order: [],
+    };
+
+    const end_trial = () => {
+      this.jsPsych.pluginAPI.clearAllTimeouts();
+      this.jsPsych.pluginAPI.cancelAllKeyboardResponses();
+      display_element.innerHTML = old_html;
+      trial_data.rt = reactiontimes;
+      trial_data.cumrt = cumulative_rts;
+      trial_data.correct = responses;
+      trial_data.words = correct;
+      trial_data.distractors = distractor;
+      trial_data.order = order;
+      console.log(trial_data);
+      this.jsPsych.finishTrial(trial_data);
+    };
+
+    const installResponse = () => {
+      this.jsPsych.pluginAPI.getKeyboardResponse({
+        callback_function: afterResponse,
+        valid_responses: valid_keys,
+        rt_method: "performance",
+        persist: false,
+        allow_held_key: false,
+      });
+    };
+
+    let currentRedoMsg = redo_message;
+
+    const handleMistake = () => {
+      const div = display_element.querySelector("#feedback");
+      div.innerHTML = currentRedoMsg;
+      installResponse();
+    };
+
+    const afterResponse = (info) => {
+      function mapKey(letter) {
+        if (left_keys.includes(letter)) return 0;
+        if (right_keys.includes(letter)) return 1;
+      }
+
+      const selection = mapKey(info.key);
+      if (first) {
+        reactiontimes.push(info.rt);
+        responses.push(order[group_index] === selection ? 1 : 0);
+      }
+      cumulative_rt += info.rt;
+
+      if (order[group_index] === selection) {
+        cumulative_rts.push(cumulative_rt);
+        const completedIndex = group_index;
+        group_index++;
+        cumulative_rt = 0;
+        first = true;
+        if (typeof trial_pars.on_word_correct === "function") {
+          const newHtml = trial_pars.on_word_correct({
+            wordIndex: completedIndex,
+            wordsSelected: correct.slice(0, group_index),
+          });
+          if (newHtml != null) {
+            display_element.querySelector("#status").innerHTML = newHtml;
+          }
+        }
+        if (group_index >= order.length) {
+          end_trial();
+        } else {
+          const div = display_element.querySelector("#feedback");
+          div.innerHTML = normal_message;
+          installResponse();
+          drawStimulus(group_index);
+        }
+      } else {
+        first = false;
+        currentRedoMsg = redo_message;
+        if (typeof trial_pars.on_word_wrong === "function") {
+          const newHtml = trial_pars.on_word_wrong({
+            wordIndex: group_index,
+            wordsSelected: correct.slice(0, group_index),
+          });
+          if (newHtml != null) currentRedoMsg = newHtml;
+        }
+        if (redo === false) {
+          end_trial();
+        } else {
+          if (delay === null) {
+            handleMistake();
+          } else {
+            cumulative_rt += delay;
+            const div = display_element.querySelector("#feedback");
+            div.innerHTML = error_message;
+            this.jsPsych.pluginAPI.setTimeout(handleMistake, delay);
+          }
+        }
+      }
+    };
+
+    installResponse();
+    drawStimulus(group_index);
+  }
+}
+
+export default MazePlugin;

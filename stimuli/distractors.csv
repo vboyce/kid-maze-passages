@@ -1,0 +1,50 @@
+type,item_num,sentence,distractors,labels
+T. rex's Tiny Arms,1,Tyrannosaurus rex is one of the most famous dinosaurs ever.,x-x-x pores your seat cash agree totally mayor spend mandatory.,0 1 2 3 4 5 6 7 8 9
+Whale Culture,1,Humpback whales are known for their complex songs and exciting jumps out of the water.,x-x-x pores your seat cash agree totally mayor spend mandatory sleeve nine add must share.,0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+T. rex's Tiny Arms,2,"For such a huge, powerful hunter, it had surprisingly tiny arms.","x-x-x wife allow peter, walker mason, aware submit diagram harry jimmy.",0 1 2 3 4 5 6 7 8 9 10
+Whale Culture,2,They are also some of the most creative hunters in the ocean.,x-x-x wife allow peter walker mason aware submit diagram harry jimmy liked.,0 1 2 3 4 5 6 7 8 9 10 11
+T. rex's Tiny Arms,3,T-rex was about 40 feet long and could weigh as much as 9 tons.,x-x-x twain unless midlands civil hates lord nights temple job award delete counties emperor.,0 1 2 3 4 5 6 7 8 9 10 11 12 13
+Whale Culture,3,"These whales use bubbles to trap and catch fish, in a hunting technique called bubble net feeding.","x-x-x twain unless midlands civil hates lord nights temple, job award delete counties emperor suffers poor chrome.",0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+T. rex's Tiny Arms,4,Its arms were only about 3 feet long.,x-x-x badly whom mike yeah hall agent wind.,0 1 2 3 4 5 6 7
+Whale Culture,4,Here's how it works.,x-x-x badly whom mike.,0 1 2 3
+T. rex's Tiny Arms,5,"With arms that short, it couldn't even reach its own mouth.","x-x-x eager canes votes, uses article glad ford role took lovely.",0 1 2 3 4 5 6 7 8 9 10
+Whale Culture,5,A whale dives below a school of fish.,x-x-x eager canes votes uses article glad ford.,0 1 2 3 4 5 6 7
+T. rex's Tiny Arms,6,Why would such a fierce predator have arms that seem almost useless?,x-x-x sonar thank got vibes genres likes receipt kid lawyer address derail?,0 1 2 3 4 5 6 7 8 9 10 11
+Whale Culture,6,"It swims in a slow upward spiral, blowing air through its blowhole.","x-x-x sonar thank got vibes genres likes, receipt kid lawyer address derail.",0 1 2 3 4 5 6 7 8 9 10 11
+T. rex's Tiny Arms,7,Scientists have known for decades that T-rex isn't the only dinosaur like this.,x-x-x throats miller eat unable officer Elk estate page avoided columns hours tour.,0 1 2 3 4 5 6 7 8 9 10 11 12
+Whale Culture,7,The bubbles rise to the surface and form a curtain.,x-x-x throats miller eat unable officer elk estate page avoided.,0 1 2 3 4 5 6 7 8 9
+T. rex's Tiny Arms,8,Fossils from several other dinosaur families show the same pattern.,x-x-x hear although handle subdued seriously staff mid led rangers.,0 1 2 3 4 5 6 7 8 9
+Whale Culture,8,"It is like a net made of air, and the fish trapped inside can't escape.","x-x-x hear although handle subdued seriously staff mid, led rangers nor essays senate sale reader.",0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+T. rex's Tiny Arms,9,"They too had tiny arms, giant bodies, and huge heads with powerful jaws.","x-x-x east dale pry tony, purchase josh, apply loan wage expect involving tack.",0 1 2 3 4 5 6 7 8 9 10 11 12
+Whale Culture,9,Then the whale lunges up through the middle with its mouth open wide.,x-x-x east dale pry tony purchase josh apply loan wage expect involving tack.,0 1 2 3 4 5 6 7 8 9 10 11 12
+T. rex's Tiny Arms,10,"These groups were only distantly related, yet these same features evolved independently multiple times.","x-x-x blaster hotel remedy stoppage wear, hang camera ready posh nervous laboratories husband whose.",0 1 2 3 4 5 6 7 8 9 10 11 12 13
+Whale Culture,10,It swallows an enormous mouthful of fish in one gulp.,x-x-x blaster hotel remedy stoppage wear hang camera ready posh.,0 1 2 3 4 5 6 7 8 9
+T. rex's Tiny Arms,11,What could have driven dinosaurs to separately develop small arms so many times?,x-x-x paisley placebo venue tore owned moody consists butler wrote nobody order worry?,0 1 2 3 4 5 6 7 8 9 10 11 12
+Whale Culture,11,"Some humpback whales do this alone, but others hunt in teams.","x-x-x paisley placebo venue tore owned, moody consists butler wrote nobody.",0 1 2 3 4 5 6 7 8 9 10
+T. rex's Tiny Arms,12,"To understand why, scientists measured skull sizes alongside arm sizes across many different species.","x-x-x reasons huge, continent messed oracle kitty grateful dealer gulf teacher sweet certainly larger.",0 1 2 3 4 5 6 7 8 9 10 11 12 13
+Whale Culture,12,"When they work together, they take on different roles.","x-x-x reasons huge continent, messed oracle kitty grateful dealer.",0 1 2 3 4 5 6 7 8
+T. rex's Tiny Arms,13,A clear pattern emerged.,x-x-x abide becomes conquer.,0 1 2 3
+Whale Culture,13,"Some whales produce the bubbles, and others herd the fish toward the center.","x-x-x abide becomes conquer midland, soul basis sheen fund spoke argue send brought.",0 1 2 3 4 5 6 7 8 9 10 11 12
+T. rex's Tiny Arms,14,"Where skulls grew bigger and more robust, the arms tended to get shorter and the overall body size increased.","x-x-x kennel broad reduce entire grade fisher, thing ken pep keeps salads sergeant oh ask download loved court thousand.",0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+Whale Culture,14,Some even make loud calls that may help herd the fish tighter.,x-x-x kennel broad reduce entire grade fisher thing ken pep keeps salads.,0 1 2 3 4 5 6 7 8 9 10 11
+T. rex's Tiny Arms,15,"One idea is that as the prey animals got bigger and tougher, a powerful bite became more and more important.","x-x-x lotus hey smith gone fell belle google items actress hour accidents, gift arts gosh crazy bids rule rock programs.",0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+Whale Culture,15,"Each whale has a role, and the whole team has to coordinate for the hunt to succeed.","x-x-x lotus hey smith gone, fell belle google items actress hour accidents gift arts gosh crazy bids.",0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+T. rex's Tiny Arms,16,"Over millions of years, skulls grew larger and jaws grew more powerful.","x-x-x darkest emphasis sense, motivates garnet utmost gets inquest loves proof mistakes.",0 1 2 3 4 5 6 7 8 9 10 11
+Whale Culture,16,"Scientists tracked hundreds of individual humpback whales in British Columbia, Canada, over twenty years.","x-x-x darkest emphasis sense motivates garnet utmost gets Inquest Loves, Proof, mistakes asset winner.",0 1 2 3 4 5 6 7 8 9 10 11 12 13
+T. rex's Tiny Arms,17,"As the skull became the main tool for catching prey, the arms were no longer needed.","x-x-x ivy wholly presidency mama lamented seeks rocky fabulous yup, grand republicans decree saint dollars happen.",0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+Whale Culture,17,Humpback whales have distinctive tail markings which scientists used to tell individual whales apart.,x-x-x ivy wholly presidency mama lamented seeks rocky fabulous yup grand republicans decree saint.,0 1 2 3 4 5 6 7 8 9 10 11 12 13
+T. rex's Tiny Arms,18,"Growing large arms takes energy, so gradually the arms got smaller and smaller.","x-x-x deserved offs thinks herring, blog consisting owner filed week passes fan supreme.",0 1 2 3 4 5 6 7 8 9 10 11 12
+Whale Culture,18,The scientists tracked which whales spent time together.,x-x-x deserved offs thinks herring blog consisting owner.,0 1 2 3 4 5 6 7
+T. rex's Tiny Arms,19,Not all dinosaurs followed this path.,x-x-x areas lagoon vehicle bridal awful.,0 1 2 3 4 5
+Whale Culture,19,They also noted which whales knew how to bubble net feed and when they fed alone or together.,x-x-x areas lagoon vehicle bridal awful nice city drafted earn squad wow royal dream onto faith guy questions.,0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+T. rex's Tiny Arms,20,Plant-eating dinosaurs kept their smaller heads and longer arms.,x-x-x seventy highest hundred replace sudden isle anybody robin.,0 1 2 3 4 5 6 7 8
+Whale Culture,20,They found strong evidence that the bubble net technique spreads through social contact.,x-x-x seventy highest hundred replace sudden isle anybody robin snapshot finished august surprise.,0 1 2 3 4 5 6 7 8 9 10 11 12
+T. rex's Tiny Arms,21,So did dinosaurs that hunted in different ways.,x-x-x doubt bohemian knows bologna amount somebody floor.,0 1 2 3 4 5 6 7
+Whale Culture,21,Whales that spent more time together were far more likely to both use it.,x-x-x doubt bohemian knows bologna amount somebody floor learn concept eye seems art lady.,0 1 2 3 4 5 6 7 8 9 10 11 12 13
+T. rex's Tiny Arms,22,"T-rex's tiny arms may look strange, but they weren't a flaw.","x-x-x blew asked cheers creek avenue, park month requests hoodie rites.",0 1 2 3 4 5 6 7 8 9 10
+Whale Culture,22,This suggests that bubble net feeding is not something whales are born knowing or that they invent on their own.,x-x-x blew asked cheers creek avenue park month requests hoodie rites wall barely hill lie seven rains dude shown ten.,0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+T. rex's Tiny Arms,23,"By that point, T-rex's jaws had simply taken over the job.","x-x-x throw lose, Pancreas gents bus articles couple suggested knew savages.",0 1 2 3 4 5 6 7 8 9 10
+Whale Culture,23,It is a skill that is learned by watching and copying other whales.,x-x-x throw lose pancreas gents bus articles couple suggested knew savages bought expire.,0 1 2 3 4 5 6 7 8 9 10 11 12
+T. rex's Tiny Arms,24,The tiny arms were a consequence of the skull becoming T-rex's main weapon.,x-x-x threw marry worst lake commonwealth cities frank viable entitled Admirers came wright.,0 1 2 3 4 5 6 7 8 9 10 11 12
+Whale Culture,24,This is similar to how you might learn how to cook by watching family members in the kitchen.,x-x-x threw marry worst lake commonwealth cities frank viable entitled admirers came wright county finally king cent muscle.,0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17
+T. rex's Tiny Arms,25,It was becoming one of the most powerful predators on Earth.,x-x-x ball amounts cup laws join china kitchen instruct step Luck.,0 1 2 3 4 5 6 7 8 9 10

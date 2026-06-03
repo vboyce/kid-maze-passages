@@ -1,0 +1,4 @@
+type,item_num,sentence,distractors,labels
+practice,1,The cat sat on the mat.,x-x-x rid ken case sir bred.,0 1 2 3 4 5
+practice,2,The dog barked at a squirrel.,x-x-x whom sulfate gain sort disasters.,0 1 2 3 4 5
+practice,3,The bunny rabbit nibbled a carrot.,x-x-x fooled priced orchards pull hybrids.,0 1 2 3 4 5

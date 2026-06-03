@@ -1,0 +1,82 @@
+import MazePlugin from "./maze.js";
+import HtmlButtonResponsePlugin from "@jspsych/plugin-html-button-response";
+import { ERROR_MESSAGE, REDO_MESSAGE, REDO_MESSAGE_PRACTICE } from "./instructions.js";
+
+function imageTrial(img, credit, aboveText = null) {
+  return {
+    type: HtmlButtonResponsePlugin,
+    stimulus:
+      (aboveText ? `<h2>${aboveText}</h2>` : "") +
+      `<img src="assets/images/${img}" alt=""` +
+      ` style="max-width:100%;max-height:70vh;display:block;margin:0 auto;">` +
+      `<p class="img-credit">${credit ?? ""}</p>`,
+    choices: ["Continue"],
+  };
+}
+
+export function buildPassageTimeline(passage, passageIndex, numPassages) {
+  const items = [];
+  const passageNum = passageIndex + 1;
+  const total = passage.sentences.length;
+
+  for (let s = 0; s < passage.sentences.length; s++) {
+    const sent = passage.sentences[s];
+    const prompt = `<p>Story ${passageNum} of ${numPassages} · Sentence ${s + 1} of ${total}</p>`;
+    items.push({
+      type: MazePlugin,
+      correct: sent.sent,
+      distractor: sent.distractor,
+      prompt,
+      error_message: ERROR_MESSAGE,
+      redo_message: REDO_MESSAGE,
+      data: { passage: passageNum, sentence: sent.num },
+    });
+
+    if (sent.img != null) {
+      items.push(imageTrial(sent.img, sent.credit));
+    }
+  }
+
+  return items;
+}
+
+export function buildPracticeTimeline(practiceSentences) {
+  const items = [];
+
+  for (const sent of practiceSentences) {
+    items.push({
+      type: HtmlButtonResponsePlugin,
+      stimulus: sent.instruction,
+      choices: ["Try it!"],
+    });
+
+    const mazeItem = {
+      type: MazePlugin,
+      correct: sent.sent,
+      distractor: sent.distractor,
+      order: sent.order ?? null,
+      prompt: sent.level === 1 ? `<p>${sent.word_tips[0]}</p>` : "",
+      error_message: ERROR_MESSAGE,
+      redo_message: sent.level === 3 ? REDO_MESSAGE : REDO_MESSAGE_PRACTICE,
+    };
+
+    if (sent.level === 1) {
+      mazeItem.on_word_correct = ({ wordIndex, wordsSelected }) => {
+        const sentSoFar = wordsSelected.join(" ");
+        const tip = sent.word_tips[wordIndex + 1] ?? "";
+        return `<p>${sentSoFar} →</p><p>${tip}</p>`;
+      };
+    } else if (sent.level === 2) {
+      mazeItem.on_word_correct = ({ wordsSelected }) =>
+        `<p>${wordsSelected.join(" ")} →</p>`;
+    }
+
+    items.push(mazeItem);
+
+    if (sent.img != null) {
+      items.push(imageTrial(sent.img, sent.credit, "Great job!"));
+    }
+  }
+
+  return items;
+}

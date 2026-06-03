@@ -1,0 +1,6 @@
+The cat sat on the mat.
+[ cat.jpg | by Elisa (https://www.flickr.com/photos/37996605603@N01/, CC-BY-NC)]
+The dog barked at a squirrel.
+[ dog.jpg | by Mark Robinson (https://www.flickr.com/photos/66176388@N00/, CC-BY-NC)]
+The bunny rabbit nibbled a carrot. 
+[ bunny.jpg | by sunnyelou (https://www.flickr.com/photos/sunnyelou/, CC-BY-NC)]

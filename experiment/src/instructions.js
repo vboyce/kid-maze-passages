@@ -1,0 +1,36 @@
+// TODO: replace with finalized kid-friendly text before launch
+
+export const INSTRUCTIONS =
+  "<h2>Let's read some stories!</h2>" +
+  "<p>We have a fun way to read. You'll see <b>two words</b> on the screen at a time, " +
+  "but only one of them belongs in the sentence.</p>" +
+  "<p>Your job is to pick the word that fits!</p>"
+  
+
+
+// TODO: finalize kid-friendly text
+export const PRE_STORIES =
+  "<h2>Great practice!</h2>" +
+  "<p>Now it's time for the real stories. Remember:</p>" +
+  "<p>Pick the word that fits the story.</p>" +
+  "<p>Press <b>E</b> for the word on the left, <b>I</b> for the right.</p>" +
+  "<p>Try to go fast, but it's okay if you make a mistake — you can try again!</p>"+
+  "<p>Ready? Let's go!</p>";
+
+export const BETWEEN_PASSAGES =
+  "<h2>Great job!</h2>" +
+  "<p>You finished the first story! Ready for the next one?</p>";
+
+export const DONE =
+  "<h2>You did it!</h2>" +
+  "<p>Thanks so much for reading with us today!</p>";
+
+// TODO: finalize kid-friendly wrong-answer feedback
+// Shown briefly after a wrong answer (during the delay before the next keypress is accepted).
+export const ERROR_MESSAGE = "<p>Oops! That's not it! </p>";
+
+// Shown after the delay, when the next keypress is accepted.
+export const REDO_MESSAGE = "<p>Try again!</p>";
+
+// Prefix for practice level-1 wrong-answer hints: shown as "WRONG_HINT_PREFIX [word tip]".
+export const REDO_MESSAGE_PRACTICE = "<p>Try choosing the other word!</p>";
