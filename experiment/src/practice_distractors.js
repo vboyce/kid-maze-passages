@@ -2,7 +2,7 @@
 // Re-run generate_stimuli.py to update.
 
 export const PRACTICE_DISTRACTORS = [
-  "--- rid ken case sir bred.",
-  "--- whom sulfate gain sort disasters.",
-  "--- fooled priced orchards pull hybrids.",
+  "--- earn vary help goes take.",
+  "--- wake stardom sun sort outputs.",
+  "--- rocked carol carefree same ballots.",
 ];

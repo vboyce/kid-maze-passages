@@ -6,6 +6,8 @@ import {
   computeStats,
   debriefHtml,
   buildDebriefTrial,
+  buildDebriefTrialFromStats,
+  linearRegression,
 } from "../debrief.js";
 
 // ---------------------------------------------------------------------------
@@ -233,5 +235,65 @@ describe("buildDebriefTrial", () => {
     const html = typeof trial.stimulus === "function" ? trial.stimulus() : trial.stimulus;
     // passageTrial1: 5/6, passageTrial2: 3/3 → 8/9 ≈ 89%
     expect(html).toContain("89%");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// buildDebriefTrialFromStats
+// ---------------------------------------------------------------------------
+
+describe("buildDebriefTrialFromStats", () => {
+  const fakeStats = { pctCorrect: 0.75, byLength: new Map([[3, { correctRts: [300, 350], incorrectRts: [500] }]]) };
+
+  it("returns an HtmlButtonResponse trial", () => {
+    const trial = buildDebriefTrialFromStats(fakeStats);
+    expect(trial.type).toBe(HtmlButtonResponsePlugin);
+  });
+
+  it("stimulus is a plain string (not a function) containing the pct correct", () => {
+    const trial = buildDebriefTrialFromStats(fakeStats);
+    expect(typeof trial.stimulus).toBe("string");
+    expect(trial.stimulus).toContain("75%");
+  });
+
+  it("has an on_load function", () => {
+    const trial = buildDebriefTrialFromStats(fakeStats);
+    expect(typeof trial.on_load).toBe("function");
+  });
+
+  it("has at least one choice", () => {
+    const trial = buildDebriefTrialFromStats(fakeStats);
+    expect(trial.choices.length).toBeGreaterThan(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// linearRegression
+// ---------------------------------------------------------------------------
+
+describe("linearRegression", () => {
+  it("returns null for an empty array", () => {
+    expect(linearRegression([])).toBeNull();
+  });
+
+  it("returns null for a single point", () => {
+    expect(linearRegression([{ x: 1, y: 2 }])).toBeNull();
+  });
+
+  it("returns correct slope and intercept for a perfect line y = 2x + 1", () => {
+    const result = linearRegression([{ x: 1, y: 3 }, { x: 2, y: 5 }, { x: 3, y: 7 }]);
+    expect(result.slope).toBeCloseTo(2);
+    expect(result.intercept).toBeCloseTo(1);
+  });
+
+  it("returns a positive slope for data that increases with x", () => {
+    const result = linearRegression([{ x: 1, y: 1.1 }, { x: 2, y: 1.9 }, { x: 3, y: 3.2 }]);
+    expect(result.slope).toBeGreaterThan(0);
+  });
+
+  it("works with exactly two points", () => {
+    const result = linearRegression([{ x: 0, y: 0 }, { x: 4, y: 8 }]);
+    expect(result.slope).toBeCloseTo(2);
+    expect(result.intercept).toBeCloseTo(0);
   });
 });

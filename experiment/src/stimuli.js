@@ -20,9 +20,9 @@ export const PRACTICE_SENTENCES = [
     word_tips: [
       "The sentence starts with <b>The</b> — find it!",
       "Great! Now what makes sense after 'The' ... how about <b>cat</b>.",
-      "Awesome! Now we have 'The cat', so what belongs next -- ken or <b>sat</b>?",
-      "What word comes next -- <b>on</b> or case?",
-      "What word belongs here -- the or sir?",
+      "Awesome! Now we have 'The cat', so what belongs next -- vary or <b>sat</b>?",
+      "What word comes next -- <b>on</b> or help?",
+      "What word belongs here -- the or goes?",
       "What word finishes the sentence?",
     ],
   },

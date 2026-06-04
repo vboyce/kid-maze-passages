@@ -137,18 +137,48 @@ const info = {
         "Called after each correct word selection with {wordIndex, wordsSelected}. " +
         "Return HTML to replace the status area, or null/undefined to leave it unchanged.",
     },
+    show_key_labels: {
+      type: ParameterType.BOOL,
+      pretty_name: "Show key labels",
+      default: false,
+      description: "When true, shows E / I key badges below the word choices.",
+    },
   },
 };
 
 function createTextArea(display_element) {
   let div = document.createElement("div");
   display_element.appendChild(div);
-  div.style.height = "300px";
   div.style.display = "flex";
   div.style.justifyContent = "center";
-  div.style.alignContent = "center";
+  div.style.alignItems = "center";
   div.id = "feedback";
   return div;
+}
+
+function createKeyLabels(display_element, trial_pars) {
+  const bar = document.createElement("div");
+  bar.style.display = "flex";
+  bar.style.width = `min(${trial_pars.width}px, 100%)`;
+  bar.style.gap = "10%";
+  bar.style.margin = "6px auto 0";
+
+  function badge(letter, align) {
+    const cell = document.createElement("div");
+    cell.style.flex = "1";
+    cell.style.textAlign = align;
+    cell.style.fontSize = "20px";
+    cell.style.fontFamily = "sans-serif";
+    cell.style.color = "#444";
+    cell.innerHTML =
+      `<kbd style="border:1px solid #bbb;border-radius:4px;` +
+      `padding:2px 10px;background:#f5f5f5;box-shadow:0 2px 0 #ccc">${letter}</kbd>`;
+    return cell;
+  }
+
+  bar.appendChild(badge("E", "right"));
+  bar.appendChild(badge("I", "left"));
+  display_element.appendChild(bar);
 }
 
 function createWordDisplay(display_element, trial_pars) {
@@ -157,12 +187,12 @@ function createWordDisplay(display_element, trial_pars) {
   container.style.display = "flex";
   container.style.justifyContent = "center";
   container.style.alignItems = "center";
-  container.style.gap = (trial_pars.width * 0.1) + "px";
+  container.style.gap = "10%";
   container.style.fontFamily = trial_pars.font_family;
   container.style.fontSize = trial_pars.font_size + "px";
   container.style.color = trial_pars.font_color;
   container.style.backgroundColor = trial_pars.background_color;
-  container.style.width = trial_pars.width + "px";
+  container.style.width = `min(${trial_pars.width}px, 100%)`;
   container.style.height = trial_pars.height + "px";
   container.style.margin = "0 auto";
 
@@ -232,6 +262,7 @@ class MazePlugin {
     // --- setup display ---
     display_element.innerHTML = "<div id='status'>" + trial_pars.prompt + "</div>";
     const { leftWordEl, rightWordEl } = createWordDisplay(display_element, trial_pars);
+    if (trial_pars.show_key_labels) createKeyLabels(display_element, trial_pars);
     const feedbackDiv = createTextArea(display_element);
     feedbackDiv.innerHTML = normal_message;
 

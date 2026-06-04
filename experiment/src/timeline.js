@@ -8,7 +8,7 @@ function imageTrial(img, credit, aboveText = null) {
     stimulus:
       (aboveText ? `<h2>${aboveText}</h2>` : "") +
       `<img src="assets/images/${img}" alt=""` +
-      ` style="max-width:100%;max-height:70vh;display:block;margin:0 auto;">` +
+      ` style="width:75%;max-height:70vh;display:block;margin:0 auto;">` +
       `<p class="img-credit">${credit ?? ""}</p>`,
     choices: ["Continue"],
   };
@@ -17,16 +17,14 @@ function imageTrial(img, credit, aboveText = null) {
 export function buildPassageTimeline(passage, passageIndex, numPassages) {
   const items = [];
   const passageNum = passageIndex + 1;
-  const total = passage.sentences.length;
 
   for (let s = 0; s < passage.sentences.length; s++) {
     const sent = passage.sentences[s];
-    const prompt = `<p>Story ${passageNum} of ${numPassages} · Sentence ${s + 1} of ${total}</p>`;
     items.push({
       type: MazePlugin,
       correct: sent.sent,
       distractor: sent.distractor,
-      prompt,
+      prompt: "",
       error_message: ERROR_MESSAGE,
       redo_message: REDO_MESSAGE,
       data: { passage: passageNum, sentence: sent.num },
@@ -58,6 +56,7 @@ export function buildPracticeTimeline(practiceSentences) {
       prompt: sent.level === 1 ? `<p>${sent.word_tips[0]}</p>` : "",
       error_message: ERROR_MESSAGE,
       redo_message: sent.level === 3 ? REDO_MESSAGE : REDO_MESSAGE_PRACTICE,
+      show_key_labels: true,
     };
 
     if (sent.level === 1) {

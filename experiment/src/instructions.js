@@ -25,12 +25,11 @@ export const DONE =
   "<h2>You did it!</h2>" +
   "<p>Thanks so much for reading with us today!</p>";
 
-// TODO: finalize kid-friendly wrong-answer feedback
 // Shown briefly after a wrong answer (during the delay before the next keypress is accepted).
-export const ERROR_MESSAGE = "<p>Oops! That's not it! </p>";
+export const ERROR_MESSAGE = "<p class='feedback-error'>Oops! That's not it!</p>";
 
 // Shown after the delay, when the next keypress is accepted.
-export const REDO_MESSAGE = "<p>Try again!</p>";
+export const REDO_MESSAGE = "<p class='feedback-redo'>Try again!</p>";
 
 // Prefix for practice level-1 wrong-answer hints: shown as "WRONG_HINT_PREFIX [word tip]".
 export const REDO_MESSAGE_PRACTICE = "<p>Try choosing the other word!</p>";

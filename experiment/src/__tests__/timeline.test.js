@@ -206,6 +206,12 @@ describe("buildPracticeTimeline — level callbacks", () => {
     expect(maze1.redo_message).toBeTruthy();
   });
 
+  it("all practice maze trials have show_key_labels enabled", () => {
+    const items = buildPracticeTimeline([level1, level2, level3]);
+    const mazeItems = items.filter((t) => t.type === MazePlugin);
+    mazeItems.forEach((maze) => expect(maze.show_key_labels).toBe(true));
+  });
+
   it("level 3 maze uses the standard REDO_MESSAGE", () => {
     const items1 = buildPracticeTimeline([level1]);
     const items3 = buildPracticeTimeline([level3]);
