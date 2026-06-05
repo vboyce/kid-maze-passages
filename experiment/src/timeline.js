@@ -1,16 +1,21 @@
 import MazePlugin from "./maze.js";
 import HtmlButtonResponsePlugin from "@jspsych/plugin-html-button-response";
+import HtmlKeyboardResponsePlugin from "@jspsych/plugin-html-keyboard-response";
 import { ERROR_MESSAGE, REDO_MESSAGE, REDO_MESSAGE_PRACTICE } from "./instructions.js";
+
+const IMAGE_BASE_URL =
+  "https://raw.githubusercontent.com/vboyce/kid-maze-passages/main/experiment/assets/images/";
 
 function imageTrial(img, credit, aboveText = null) {
   return {
-    type: HtmlButtonResponsePlugin,
+    type: HtmlKeyboardResponsePlugin,
     stimulus:
       (aboveText ? `<h2>${aboveText}</h2>` : "") +
-      `<img src="assets/images/${img}" alt=""` +
-      ` style="width:75%;max-height:70vh;display:block;margin:0 auto;">` +
-      `<p class="img-credit">${credit ?? ""}</p>`,
-    choices: ["Continue"],
+      `<img src="${IMAGE_BASE_URL}${img}" alt=""` +
+      ` style="width:75%;max-height:55vh;display:block;margin:0 auto;">` +
+      `<p class="img-credit">${credit ?? ""}</p>` +
+      `<p class="continue-hint">Press spacebar to continue</p>`,
+    choices: [" "],
   };
 }
 

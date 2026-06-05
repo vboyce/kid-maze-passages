@@ -21,6 +21,8 @@ import {
 import { buildPassageTimeline, buildPracticeTimeline } from "./timeline.js";
 import { buildDebriefTrial, buildDebriefTrialFromStats, computeStats } from "./debrief.js";
 import { buildExitSurvey, buildFinalPage } from "./survey.js";
+import { createPauseButton, createStopButton } from "./controls.js";
+import { buildConsentTimeline } from "./consent.js";
 
 const SECTIONS = ["learn-how", "story-1", "story-2", "wrap-up"];
 
@@ -86,6 +88,10 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     },
   });
 
+  const progressBar = document.querySelector("#progress-bar");
+  const pauseControl = createPauseButton(jsPsych, progressBar);
+  const stopControl = createStopButton(jsPsych, progressBar);
+
   const timeline = [];
 
   if (new URLSearchParams(window.location.search).get("dev") === "debrief") {
@@ -101,6 +107,11 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     type: PreloadPlugin,
     images: assetPaths.images,
   });
+
+  const skipConsent = new URLSearchParams(window.location.search).get("dev") === "skip-consent";
+  // In CHS, window.chsRecord is pre-loaded. Pass null for dev-mode placeholder screens.
+  const chsRecord = skipConsent ? null : (window.chsRecord ?? null);
+  timeline.push(...buildConsentTimeline(chsRecord));
 
   // Instructions — progress bar already shows "learn-how" from createProgressBar()
   timeline.push({
@@ -137,7 +148,11 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   // Wrap-up: debrief, survey, final page
   const debriefTrial = buildDebriefTrial(jsPsych);
-  debriefTrial.on_start = () => setSection("wrap-up");
+  debriefTrial.on_start = () => {
+    setSection("wrap-up");
+    pauseControl.hide();
+    stopControl.hide();
+  };
   timeline.push(debriefTrial);
 
   timeline.push(buildExitSurvey());

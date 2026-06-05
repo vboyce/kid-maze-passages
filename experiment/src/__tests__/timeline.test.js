@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import { buildPassageTimeline, buildPracticeTimeline } from "../timeline.js";
 import MazePlugin from "../maze.js";
 import HtmlButtonResponsePlugin from "@jspsych/plugin-html-button-response";
+import HtmlKeyboardResponsePlugin from "@jspsych/plugin-html-keyboard-response";
 
 // ---------------------------------------------------------------------------
 // buildPassageTimeline
@@ -24,7 +25,7 @@ describe("buildPassageTimeline", () => {
     // item 0 = maze for sentWithImg, item 1 = image trial, item 2 = maze for sentNoImg
     expect(items).toHaveLength(3);
     expect(items[0].type).toBe(MazePlugin);
-    expect(items[1].type).toBe(HtmlButtonResponsePlugin);
+    expect(items[1].type).toBe(HtmlKeyboardResponsePlugin);
     expect(items[2].type).toBe(MazePlugin);
   });
 
@@ -49,11 +50,18 @@ describe("buildPassageTimeline", () => {
     expect(imgTrial.stimulus).toContain("CC-BY");
   });
 
-  it("image trial has a Continue choice", () => {
+  it("image trial accepts spacebar to advance", () => {
     const passage = { title: "Test", sentences: [sentWithImg] };
     const items = buildPassageTimeline(passage, 0, 1);
     const imgTrial = items[1];
-    expect(imgTrial.choices).toContain("Continue");
+    expect(imgTrial.choices).toContain(" ");
+  });
+
+  it("image trial stimulus prompts the participant to press spacebar", () => {
+    const passage = { title: "Test", sentences: [sentWithImg] };
+    const items = buildPassageTimeline(passage, 0, 1);
+    const imgTrial = items[1];
+    expect(imgTrial.stimulus.toLowerCase()).toContain("spacebar");
   });
 
   it("maze trials carry passage and sentence data tags", () => {
@@ -124,7 +132,7 @@ describe("buildPracticeTimeline — structure", () => {
     const items = buildPracticeTimeline([level1]);
     // instruction, maze, image
     expect(items).toHaveLength(3);
-    expect(items[2].type).toBe(HtmlButtonResponsePlugin);
+    expect(items[2].type).toBe(HtmlKeyboardResponsePlugin);
     expect(items[2].stimulus).toContain("cat.jpg");
   });
 
