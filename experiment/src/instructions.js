@@ -1,10 +1,16 @@
 // TODO: replace with finalized kid-friendly text before launch
 
+const IMAGE_BASE_URL =
+  "https://raw.githubusercontent.com/vboyce/kid-maze-passages/main/experiment/assets/images/";
+
 export const INSTRUCTIONS =
   "<h2>Let's read some stories!</h2>" +
   "<p>We have a fun way to read. You'll see <b>two words</b> on the screen at a time, " +
   "but only one of them belongs in the sentence.</p>" +
-  "<p>Your job is to pick the word that fits!</p>"
+  "<p>Your job is to pick the word that fits!</p>" +
+  "<p>Press <b>E</b> for the word on the left, <b>I</b> for the word on the right.</p>" +
+  `<img src="${IMAGE_BASE_URL}keyboard_hand.jpg"` +
+  ` alt="Hands on a keyboard with E and I highlighted" style="width:70%;max-height:40vh;display:block;margin:16px auto;">`
   
 
 
@@ -19,6 +25,8 @@ export const PRE_STORIES =
 
 export const BETWEEN_PASSAGES =
   "<h2>Great job!</h2>" +
+  `<img src="${IMAGE_BASE_URL}Owl_circling_its_head_repeatedly.gif"` +
+  ` alt="A baby owl bobbing its head" style="width:60%;max-height:40vh;display:block;margin:16px auto;">` +
   "<p>You finished the first story! Ready for the next one?</p>";
 
 export const DONE =

@@ -41,6 +41,8 @@ export function buildFinalPage() {
     type: HtmlButtonResponsePlugin,
     stimulus:
       "<h2>You're all done!</h2>" +
+      `<img src="https://raw.githubusercontent.com/vboyce/kid-maze-passages/main/experiment/assets/images/115176-703930484_tiny-ezgif.com-video-to-gif-converter.gif"` +
+      ` alt="Penguins celebrating" style="width:60%;max-height:40vh;display:block;margin:16px auto;">` +
       "<p>Thank you for participating in this study!</p>"+
       "<p> This study is about when words are harder or easier to read, and how that might change as kids grow up."+
       " Adults take longer to read words that are less common (like `porcupine`) compared to words that are common (like `dog`)."+
