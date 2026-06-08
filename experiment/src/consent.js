@@ -39,6 +39,7 @@ const CONSENT_PARAMS = {
 const ASSENT_PAGES = [
   {
     stimulus: assentStimulus(
+      `<img src=”${IMAGE_BASE_URL}assent_1.png” alt=”” style=”max-height:180px;display:block;margin:0 auto 12px;”>` +
       “<p>We are asking you to take part in a research study! “ +
       “We are scientists who are trying to learn more about how kids read and understand language.</p>”
     ),
@@ -55,6 +56,10 @@ const ASSENT_PAGES = [
   },
   {
     stimulus: assentStimulus(
+      `<div style=”display:flex;gap:16px;align-items:center;justify-content:center;margin-bottom:12px;”>` +
+      `<img src=”${IMAGE_BASE_URL}assent_3.png” alt=”” style=”max-height:150px;”>` +
+      `<img src=”${IMAGE_BASE_URL}assent_3_maze.png” alt=”Example of the maze task” style=”max-height:150px;”>` +
+      `</div>` +
       “<p>In this study, you will read sentences in a funny way — you’ll see two words at a time and pick which one continues the sentence.</p>” +
       “<p>If you decide to do this study, we’ll give you step-by-step instructions!</p>”
     ),
@@ -62,6 +67,7 @@ const ASSENT_PAGES = [
   },
   {
     stimulus: assentStimulus(
+      `<img src=”${IMAGE_BASE_URL}assent_4.png” alt=”” style=”max-height:180px;display:block;margin:0 auto 12px;”>` +
       “<p>This isn’t a test! We just want to learn more about how kids read and think. “ +
       “There are no right or wrong answers. There will be places to take a break if you need one.</p>”
     ),
@@ -69,6 +75,7 @@ const ASSENT_PAGES = [
   },
   {
     stimulus: assentStimulus(
+      `<img src=”${IMAGE_BASE_URL}assent_5.png” alt=”” style=”max-height:180px;display:block;margin:0 auto 12px;”>` +
       “<p>Participation is voluntary. If you don’t want to do this study, just press “no” below — “ +
       “that’s totally fine. If you start and then want to stop, you can do that too – “ +
       “just tell your parent or close the experiment window.</p>”
@@ -77,6 +84,7 @@ const ASSENT_PAGES = [
   },
   {
     stimulus: assentStimulus(
+      `<img src=”${IMAGE_BASE_URL}assent_6.png” alt=”” style=”max-height:180px;display:block;margin:0 auto 12px;”>` +
       “<p>There are no known risks to being in this study. “ +
       “There are no direct benefits to you personally, but you’ll be helping us understand how kids learn to read!</p>” +
       “<p>If you have questions about this study, ask your parent, send us a message on Children Helping Science, “ +
