@@ -3,41 +3,23 @@
 //   - No SCSS import (CSS compiled separately by build_chs.sh)
 //   - No PreloadPlugin (all images served from GitHub URLs)
 //   - Runs as an IIFE; no jspsych-builder export async function run() wrapper
-//   - on_finish hides chrome instead of calling displayData()
+//   - Uses window.initJsPsych (chsInitJsPsych) for auto-save and exit redirect
+//   - on_finish hides chrome
 
-import { initJsPsych } from "jspsych";
 import HtmlButtonResponsePlugin from "@jspsych/plugin-html-button-response";
 
-import { passages, PRACTICE_SENTENCES } from "./stimuli.js";
+import { passages, PRACTICE_SENTENCES, PRACTICE_IMAGES, PASSAGE_IMAGES } from "./stimuli.js";
 import { shuffle } from "./helper.js";
 import { INSTRUCTIONS, PRE_STORIES, BETWEEN_PASSAGES } from "./instructions.js";
 import { buildPassageTimeline, buildPracticeTimeline } from "./timeline.js";
-import { buildDebriefTrial, buildDebriefTrialFromStats, computeStats } from "./debrief.js";
-import { buildExitSurvey, buildFinalPage } from "./survey.js";
+import { buildDebriefTrial, buildExitSurvey, buildParentDebrief, buildFinalPage } from "./survey.js";
 import { createPauseButton, createStopButton } from "./controls.js";
-import { buildConsentTimeline } from "./consent.js";
+import { buildConsentTimeline, CONSENT_IMAGES } from "./consent.js";
+
+// Preload all study images immediately so they're cached before each section renders.
+[...CONSENT_IMAGES, ...PRACTICE_IMAGES, ...PASSAGE_IMAGES].forEach((src) => { new Image().src = src; });
 
 const SECTIONS = ["learn-how", "story-1", "story-2", "wrap-up"];
-
-// Fake maze trial data for ?dev=debrief preview.
-const DEV_FAKE_TRIALS = [
-  { trial_type: "maze", passage: 1, sentence: 1,
-    words: ["A", "it", "the", "cat", "runs", "quick", "slowly", "whenever"],
-    rt:      [180, 210, 230, 280, 320, 410, 520, 610],
-    correct: [1,   1,   1,   1,   1,   1,   1,   1] },
-  { trial_type: "maze", passage: 1, sentence: 2,
-    words: ["The", "big", "cat", "sat", "here", "often", "silently"],
-    rt:      [200, 290, 310, 260, 350, 480, 590],
-    correct: [1,   0,   1,   1,   0,   1,   1] },
-  { trial_type: "maze", passage: 1, sentence: 3,
-    words: ["An", "old", "dog", "runs", "fast", "toward", "something"],
-    rt:      [190, 240, 270, 330, 380, 460, 560],
-    correct: [1,   1,   1,   0,   1,   1,   1] },
-  { trial_type: "maze", passage: 2, sentence: 1,
-    words: ["She", "can", "jump", "quite", "really", "quickly", "whenever"],
-    rt:      [220, 250, 310, 370, 420, 510, 620],
-    correct: [1,   1,   1,   1,   1,   0,   1] },
-];
 
 function createProgressBar() {
   const labels = {
@@ -71,15 +53,18 @@ function setSection(key) {
 function hideChrome() {
   const bar = document.querySelector("#progress-bar");
   if (bar) bar.style.display = "none";
+  const container = document.querySelector("#jspsych-container");
+  if (container) container.style.display = "none";
 }
 
 (async function () {
   createProgressBar();
 
   const jsPsychContainer = document.createElement("div");
+  jsPsychContainer.id = "jspsych-container";
   document.body.appendChild(jsPsychContainer);
 
-  const jsPsych = initJsPsych({
+  const jsPsych = window.initJsPsych({
     display_element: jsPsychContainer,
     on_finish: hideChrome,
   });
@@ -88,28 +73,24 @@ function hideChrome() {
   const pauseControl = createPauseButton(jsPsych, progressBar);
   const stopControl = createStopButton(jsPsych, progressBar);
 
+  const chsExitSurveyTrial = () => {
+    const chsSurvey = window.chsSurvey ?? null;
+    if (!chsSurvey) return null;
+    return {
+      type: chsSurvey.ExitSurveyPlugin,
+      show_databrary_options: false,
+      include_withdrawal_example: true,
+      private_level_only: true,
+      on_start: () => {
+        document.body.classList.remove("study-active");
+        document.querySelector("#progress-bar").style.display = "none";
+        document.querySelector("#jspsych-container").style.display = "";
+      },
+    };
+  };
+
+  const chsRecord = window.chsRecord ?? null;
   const timeline = [];
-
-  if (new URLSearchParams(window.location.search).get("dev") === "debrief") {
-    document.body.classList.add("study-active");
-    document.querySelector("#progress-bar").style.display = "";
-    setSection("wrap-up");
-    timeline.push(buildDebriefTrialFromStats(computeStats(DEV_FAKE_TRIALS)));
-    timeline.push(buildExitSurvey());
-    timeline.push(buildFinalPage());
-    await jsPsych.run(timeline);
-    return;
-  }
-
-  const devParam = new URLSearchParams(window.location.search).get("dev");
-  const skipConsent = devParam === "skip-consent";
-  const chsRecord = skipConsent ? null : (window.chsRecord ?? null);
-
-  if (devParam === "consent-only") {
-    timeline.push(...buildConsentTimeline(chsRecord, jsPsych));
-    await jsPsych.run(timeline);
-    return;
-  }
 
   timeline.push(...buildConsentTimeline(chsRecord, jsPsych));
 
@@ -117,6 +98,7 @@ function hideChrome() {
     type: HtmlButtonResponsePlugin,
     stimulus: INSTRUCTIONS,
     choices: ["Continue"],
+    button_html: ['<button class="jspsych-btn">%choice%</button>'],
     on_start: () => {
       document.body.classList.add("study-active");
       document.querySelector("#progress-bar").style.display = "";
@@ -125,28 +107,34 @@ function hideChrome() {
 
   timeline.push(...buildPracticeTimeline(PRACTICE_SENTENCES));
 
-  timeline.push({
-    type: HtmlButtonResponsePlugin,
-    stimulus: PRE_STORIES,
-    choices: ["Let's go!"],
-    on_start: () => setSection("story-1"),
-  });
+  // SHORT_BUILD is substituted by esbuild (--define:SHORT_BUILD=true/false).
+  // When true, the passage stories are omitted so the end-to-end flow can be tested on CHS.
+  if (!SHORT_BUILD) {
+    timeline.push({
+      type: HtmlButtonResponsePlugin,
+      stimulus: PRE_STORIES,
+      choices: ["Let's go!"],
+      button_html: ['<button class="jspsych-btn">%choice%</button>'],
+      on_start: () => setSection("story-1"),
+    });
 
-  const orderedPassages = [...passages];
-  shuffle(orderedPassages);
-  for (let p = 0; p < orderedPassages.length; p++) {
-    if (p > 0) {
-      timeline.push({
-        type: HtmlButtonResponsePlugin,
-        stimulus: BETWEEN_PASSAGES,
-        choices: ["Start next story"],
-        on_start: () => setSection(`story-${p + 1}`),
-      });
+    const orderedPassages = [...passages];
+    shuffle(orderedPassages);
+    for (let p = 0; p < orderedPassages.length; p++) {
+      if (p > 0) {
+        timeline.push({
+          type: HtmlButtonResponsePlugin,
+          stimulus: BETWEEN_PASSAGES,
+          choices: ["Start next story"],
+          button_html: ['<button class="jspsych-btn">%choice%</button>'],
+          on_start: () => setSection(`story-${p + 1}`),
+        });
+      }
+      timeline.push(...buildPassageTimeline(orderedPassages[p], p, orderedPassages.length));
     }
-    timeline.push(...buildPassageTimeline(orderedPassages[p], p, orderedPassages.length));
   }
 
-  const debriefTrial = buildDebriefTrial(jsPsych);
+  const debriefTrial = buildDebriefTrial();
   debriefTrial.on_start = () => {
     setSection("wrap-up");
     pauseControl.hide();
@@ -155,6 +143,11 @@ function hideChrome() {
   timeline.push(debriefTrial);
   timeline.push(buildExitSurvey());
   timeline.push(buildFinalPage());
+
+  const exitTrial = chsExitSurveyTrial();
+  if (exitTrial) timeline.push(exitTrial);
+
+  timeline.push(buildParentDebrief());
 
   await jsPsych.run(timeline);
 })();

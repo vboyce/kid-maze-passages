@@ -1,6 +1,10 @@
 // passages and practice_distractors are auto-generated — run generate_stimuli.py to update.
-export { passages } from "./passages.js";
+import { passages } from "./passages.js";
+export { passages };
 import { PRACTICE_DISTRACTORS } from "./practice_distractors.js";
+
+const IMAGE_BASE_URL =
+  "https://raw.githubusercontent.com/vboyce/kid-maze-passages/main/experiment/assets/images/";
 
 // Practice sentences — 3-level guided progression.
 // Instructions text is placeholder; finalize before launch.
@@ -16,7 +20,9 @@ export const PRACTICE_SENTENCES = [
     instruction:
       "<h2>Let's try it together first!</h2>" +
       "<p>You'll see two words at a time. One belongs in the sentence — pick it!</p>" +
-      "<p>Press <b>E</b> for the word on the left, <b>I</b> for the word on the right.</p>",
+      "<p>Press <b>E</b> for the word on the left, <b>I</b> for the word on the right.</p>" +
+      `<img src="${IMAGE_BASE_URL}keyboard_hand.jpg"` +
+      ` alt="Hands on a keyboard with E and I highlighted" style="width:70%;max-height:40vh;display:block;margin:16px auto;">`,
     word_tips: [
       "The sentence starts with <b>The</b> — find it!",
       "Great! Now what makes sense after 'The' ... how about <b>cat</b>.",
@@ -52,3 +58,14 @@ export const PRACTICE_SENTENCES = [
       "<p>This time, the sentence won't build up at the top. Just pick the words that belong. You've got this!</p>",
   },
 ];
+
+export const PRACTICE_IMAGES = PRACTICE_SENTENCES
+  .map((s) => s.img)
+  .filter(Boolean)
+  .map((f) => IMAGE_BASE_URL + f);
+
+export const PASSAGE_IMAGES = passages
+  .flatMap((p) => p.sentences)
+  .map((s) => s.img)
+  .filter(Boolean)
+  .map((f) => IMAGE_BASE_URL + f);

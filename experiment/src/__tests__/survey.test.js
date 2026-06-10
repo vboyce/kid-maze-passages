@@ -1,7 +1,28 @@
 import { describe, it, expect } from "vitest";
 import SurveyTextPlugin from "@jspsych/plugin-survey-text";
 import HtmlButtonResponsePlugin from "@jspsych/plugin-html-button-response";
-import { buildExitSurvey, buildFinalPage } from "../survey.js";
+import { buildDebriefTrial, buildExitSurvey, buildFinalPage } from "../survey.js";
+
+// ---------------------------------------------------------------------------
+// buildDebriefTrial
+// ---------------------------------------------------------------------------
+
+describe("buildDebriefTrial", () => {
+  it("returns an HtmlButtonResponse trial", () => {
+    const trial = buildDebriefTrial();
+    expect(trial.type).toBe(HtmlButtonResponsePlugin);
+  });
+
+  it("has at least one choice", () => {
+    const trial = buildDebriefTrial();
+    expect(trial.choices.length).toBeGreaterThan(0);
+  });
+
+  it("stimulus contains the heading", () => {
+    const trial = buildDebriefTrial();
+    expect(trial.stimulus).toContain("Thanks for reading!");
+  });
+});
 
 // ---------------------------------------------------------------------------
 // buildExitSurvey

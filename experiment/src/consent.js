@@ -36,65 +36,74 @@ const CONSENT_PARAMS = {
   template: "consent-recording-only",
 };
 
+const IMG = (file, style) => `<img src='${IMAGE_BASE_URL}${file}' alt='' style='${style}'>`;
+
 const ASSENT_PAGES = [
   {
     stimulus: assentStimulus(
-      `<img src=”${IMAGE_BASE_URL}assent_1.png” alt=”” style=”max-height:180px;display:block;margin:0 auto 12px;”>` +
-      “<p>We are asking you to take part in a research study! “ +
-      “We are scientists who are trying to learn more about how kids read and understand language.</p>”
+      IMG("assent_1.png", "max-height:180px;display:block;margin:0 auto 12px") +
+      "<p>We are asking you to take part in a research study! " +
+      "We are scientists who are trying to learn more about how kids read and understand language.</p>"
     ),
     show_webcam: false,
   },
   {
     stimulus: assentStimulus(
-      `<img src=”${IMAGE_BASE_URL}vboyce.jpg” alt=”Veronica Boyce” ` +
-      `style=”width:140px;height:140px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px;”>` +
-      “<p>I’m Veronica Boyce, a researcher at MIT. “ +
-      “I study how people understand language — like what makes some sentences easy to understand and others harder.</p>”
+      `<img src='${IMAGE_BASE_URL}vboyce.jpg' alt='Veronica Boyce' ` +
+      "style='width:140px;height:140px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 12px'>" +
+      "<p>I'm Veronica Boyce, a researcher at MIT. " +
+      "I study how people understand language — like what makes some sentences easy to understand and others harder.</p>"
     ),
     show_webcam: false,
   },
   {
     stimulus: assentStimulus(
-      `<div style=”display:flex;gap:16px;align-items:center;justify-content:center;margin-bottom:12px;”>` +
-      `<img src=”${IMAGE_BASE_URL}assent_3.png” alt=”” style=”max-height:150px;”>` +
-      `<img src=”${IMAGE_BASE_URL}assent_3_maze.png” alt=”Example of the maze task” style=”max-height:150px;”>` +
-      `</div>` +
-      “<p>In this study, you will read sentences in a funny way — you’ll see two words at a time and pick which one continues the sentence.</p>” +
-      “<p>If you decide to do this study, we’ll give you step-by-step instructions!</p>”
+      `<img src='${IMAGE_BASE_URL}assent_3_maze.png' alt='Example of the maze task' style='max-height:180px;display:block;margin:0 auto 12px'>` +
+      "<p>In this study, you will read sentences in a funny way — you'll see two words at a time and pick which one continues the sentence.</p>" +
+      "<p>If you decide to do this study, we'll give you step-by-step instructions!</p>"
     ),
     show_webcam: false,
   },
   {
     stimulus: assentStimulus(
-      `<img src=”${IMAGE_BASE_URL}assent_4.png” alt=”” style=”max-height:180px;display:block;margin:0 auto 12px;”>` +
-      “<p>This isn’t a test! We just want to learn more about how kids read and think. “ +
-      “There are no right or wrong answers. There will be places to take a break if you need one.</p>”
+      IMG("assent_4.png", "max-height:180px;display:block;margin:0 auto 12px") +
+      "<p>This isn't a test! We just want to learn more about how kids read and think.<br>" +
+      "There are no right or wrong answers.<br>" +
+      "There will be places to take a break if you need one.</p>"
     ),
     show_webcam: false,
   },
   {
     stimulus: assentStimulus(
-      `<img src=”${IMAGE_BASE_URL}assent_5.png” alt=”” style=”max-height:180px;display:block;margin:0 auto 12px;”>` +
-      “<p>Participation is voluntary. If you don’t want to do this study, just press “no” below — “ +
-      “that’s totally fine. If you start and then want to stop, you can do that too – “ +
-      “just tell your parent or close the experiment window.</p>”
+      IMG("assent_5.png", "max-height:180px;display:block;margin:0 auto 12px") +
+      "<p>Participation is voluntary.<br>" +
+      "If you don't want to do this study, just press &ldquo;no&rdquo; below — that's totally fine.<br>" +
+      "If you start and then want to stop, you can do that too – just tell your parent or close the experiment window.</p>"
     ),
     show_webcam: false,
   },
   {
     stimulus: assentStimulus(
-      `<img src=”${IMAGE_BASE_URL}assent_6.png” alt=”” style=”max-height:180px;display:block;margin:0 auto 12px;”>` +
-      “<p>There are no known risks to being in this study. “ +
-      “There are no direct benefits to you personally, but you’ll be helping us understand how kids learn to read!</p>” +
-      “<p>If you have questions about this study, ask your parent, send us a message on Children Helping Science, “ +
-      “or email Veronica Boyce at vboyce@mit.edu.</p>” +
-      “<p>If you feel you have been treated unfairly, or you have questions regarding your rights as a study participant, “ +
-      “you can contact MIT’s research committee (COUHES) at 617-253-6787.</p>”
+      IMG("assent_6.png", "max-height:180px;display:block;margin:0 auto 12px") +
+      "<p>There are no known risks to being in this study. " +
+      "There are no direct benefits to you personally, but you'll be helping us understand how kids learn to read!</p>" +
+      "<p>If you have questions about this study, ask your parent, send us a message on Children Helping Science, " +
+      "or email Veronica Boyce at vboyce@mit.edu.</p>" +
+      "<p>If you feel you have been treated unfairly, or you have questions regarding your rights as a study participant, " +
+      "you can contact MIT's research committee (COUHES) at 617-253-6787.</p>"
     ),
     show_webcam: false,
   },
 ];
+
+export const CONSENT_IMAGES = [
+  "assent_1.png",
+  "vboyce.jpg",
+  "assent_3_maze.png",
+  "assent_4.png",
+  "assent_5.png",
+  "assent_6.png",
+].map((f) => IMAGE_BASE_URL + f);
 
 const MIN_AGE_TO_ASSENT = 7;
 

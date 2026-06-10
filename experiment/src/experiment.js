@@ -11,18 +11,18 @@ import { initJsPsych } from "jspsych";
 import HtmlButtonResponsePlugin from "@jspsych/plugin-html-button-response";
 import PreloadPlugin from "@jspsych/plugin-preload";
 
-import { passages, PRACTICE_SENTENCES } from "./stimuli.js";
+import { passages, PRACTICE_SENTENCES, PRACTICE_IMAGES } from "./stimuli.js";
 import { shuffle } from "./helper.js";
 import {
   INSTRUCTIONS,
   PRE_STORIES,
   BETWEEN_PASSAGES,
+  INSTRUCTION_IMAGES,
 } from "./instructions.js";
 import { buildPassageTimeline, buildPracticeTimeline } from "./timeline.js";
-import { buildDebriefTrial, buildDebriefTrialFromStats, computeStats } from "./debrief.js";
-import { buildExitSurvey, buildFinalPage } from "./survey.js";
+import { buildDebriefTrial, buildExitSurvey, buildParentDebrief, buildFinalPage } from "./survey.js";
 import { createPauseButton, createStopButton } from "./controls.js";
-import { buildConsentTimeline } from "./consent.js";
+import { buildConsentTimeline, CONSENT_IMAGES } from "./consent.js";
 
 const SECTIONS = ["learn-how", "story-1", "story-2", "wrap-up"];
 
@@ -98,14 +98,23 @@ export async function run({ assetPaths, input = {}, environment, title, version 
     setSection("wrap-up");
     timeline.push(buildDebriefTrialFromStats(computeStats(DEV_FAKE_TRIALS)));
     timeline.push(buildExitSurvey());
+    timeline.push(buildParentDebrief());
     timeline.push(buildFinalPage());
     await jsPsych.run(timeline);
     return;
   }
 
+  const BASE = "https://raw.githubusercontent.com/vboyce/kid-maze-passages/main/experiment/assets/images/";
+  const passageImages = passages.flatMap((p) =>
+    p.sentences.map((s) => s.img).filter(Boolean).map((f) => BASE + f)
+  );
+  const miscImages = [
+    BASE + "115176-703930484_tiny-ezgif.com-video-to-gif-converter.gif",
+    BASE + "330px-Wikipedia20_animated_Confetti.gif",
+  ];
   timeline.push({
     type: PreloadPlugin,
-    images: assetPaths.images,
+    images: [...CONSENT_IMAGES, ...INSTRUCTION_IMAGES, ...PRACTICE_IMAGES, ...passageImages, ...miscImages],
   });
 
   const skipConsent = new URLSearchParams(window.location.search).get("dev") === "skip-consent";
@@ -157,8 +166,11 @@ export async function run({ assetPaths, input = {}, environment, title, version 
 
   timeline.push(buildExitSurvey());
 
-  // Final page: debrief + done
+  // Final page: kid-facing "you're done" + brief explanation
   timeline.push(buildFinalPage());
+
+  // TODO: add parent exit survey here
+  timeline.push(buildParentDebrief());
 
   await jsPsych.run(timeline);
 }

@@ -20,6 +20,8 @@ export const PRE_STORIES =
   "<p>Now it's time for the real stories. Remember:</p>" +
   "<p>Pick the word that fits the story.</p>" +
   "<p>Press <b>E</b> for the word on the left, <b>I</b> for the right.</p>" +
+  `<img src="${IMAGE_BASE_URL}keyboard_hand.jpg"` +
+  ` alt="Hands on a keyboard with E and I highlighted" style="width:70%;max-height:40vh;display:block;margin:16px auto;">` +
   "<p>Try to go fast, but it's okay if you make a mistake — you can try again!</p>"+
   "<p>Ready? Let's go!</p>";
 
@@ -32,6 +34,11 @@ export const BETWEEN_PASSAGES =
 export const DONE =
   "<h2>You did it!</h2>" +
   "<p>Thanks so much for reading with us today!</p>";
+
+export const INSTRUCTION_IMAGES = [
+  "keyboard_hand.jpg",
+  "Owl_circling_its_head_repeatedly.gif",
+].map((f) => IMAGE_BASE_URL + f);
 
 // Shown briefly after a wrong answer (during the delay before the next keypress is accepted).
 export const ERROR_MESSAGE = "<p class='feedback-error'>Oops! That's not it!</p>";

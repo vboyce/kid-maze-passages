@@ -32,6 +32,7 @@ export function buildPassageTimeline(passage, passageIndex, numPassages) {
       prompt: "",
       error_message: ERROR_MESSAGE,
       redo_message: REDO_MESSAGE,
+      show_key_labels: true,
       data: { passage: passageNum, sentence: sent.num },
     });
 
@@ -51,6 +52,7 @@ export function buildPracticeTimeline(practiceSentences) {
       type: HtmlButtonResponsePlugin,
       stimulus: sent.instruction,
       choices: ["Try it!"],
+      button_html: ['<button class="jspsych-btn">%choice%</button>'],
     });
 
     const mazeItem = {
