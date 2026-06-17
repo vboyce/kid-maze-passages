@@ -167,12 +167,12 @@ function createKeyLabels(display_element, trial_pars) {
     const cell = document.createElement("div");
     cell.style.flex = "1";
     cell.style.textAlign = align;
-    cell.style.fontSize = "20px";
+    cell.style.fontSize = "32px";
     cell.style.fontFamily = "sans-serif";
     cell.style.color = "#444";
     cell.innerHTML =
-      `<kbd style="border:1px solid #bbb;border-radius:4px;` +
-      `padding:2px 10px;background:#f5f5f5;box-shadow:0 2px 0 #ccc">${letter}</kbd>`;
+      `<kbd style="border:1px solid #bbb;border-radius:6px;` +
+      `padding:4px 14px;background:#f5f5f5;box-shadow:0 2px 0 #ccc">${letter}</kbd>`;
     return cell;
   }
 

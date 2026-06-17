@@ -96,7 +96,7 @@ function hideChrome() {
 
   timeline.push({
     type: HtmlButtonResponsePlugin,
-    stimulus: INSTRUCTIONS,
+    stimulus: `<div class="instruction-slide">${INSTRUCTIONS}</div>`,
     choices: ["Continue"],
     button_html: ['<button class="jspsych-btn">%choice%</button>'],
     on_start: () => {
@@ -112,7 +112,7 @@ function hideChrome() {
   if (!SHORT_BUILD) {
     timeline.push({
       type: HtmlButtonResponsePlugin,
-      stimulus: PRE_STORIES,
+      stimulus: `<div class="instruction-slide">${PRE_STORIES}</div>`,
       choices: ["Let's go!"],
       button_html: ['<button class="jspsych-btn">%choice%</button>'],
       on_start: () => setSection("story-1"),

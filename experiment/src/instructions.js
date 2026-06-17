@@ -9,8 +9,10 @@ export const INSTRUCTIONS =
   "but only one of them belongs in the sentence.</p>" +
   "<p>Your job is to pick the word that fits!</p>" +
   "<p>Press <b>E</b> for the word on the left, <b>I</b> for the word on the right.</p>" +
+
   `<img src="${IMAGE_BASE_URL}keyboard_hand.jpg"` +
-  ` alt="Hands on a keyboard with E and I highlighted" style="width:70%;max-height:40vh;display:block;margin:16px auto;">`
+  ` alt="Hands on a keyboard with E and I highlighted" style="width:70%;max-height:40vh;display:block;margin:16px auto;">`+
+  "<p><b>Parents:</b> Please help your child find the E, I, and spacebar keys if needed! You can help them get set up in the practice trials.</p>";
   
 
 
@@ -23,6 +25,7 @@ export const PRE_STORIES =
   `<img src="${IMAGE_BASE_URL}keyboard_hand.jpg"` +
   ` alt="Hands on a keyboard with E and I highlighted" style="width:70%;max-height:40vh;display:block;margin:16px auto;">` +
   "<p>Try to go fast, but it's okay if you make a mistake — you can try again!</p>"+
+  "<p><b>Parents:</b> Please let your child complete these stories on their own! If you need to pause, press the pause button in the top right.</p>" +
   "<p>Ready? Let's go!</p>";
 
 export const BETWEEN_PASSAGES =

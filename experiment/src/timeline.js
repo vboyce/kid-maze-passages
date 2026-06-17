@@ -50,7 +50,7 @@ export function buildPracticeTimeline(practiceSentences) {
   for (const sent of practiceSentences) {
     items.push({
       type: HtmlButtonResponsePlugin,
-      stimulus: sent.instruction,
+      stimulus: `<div class="instruction-slide">${sent.instruction}</div>`,
       choices: ["Try it!"],
       button_html: ['<button class="jspsych-btn">%choice%</button>'],
     });

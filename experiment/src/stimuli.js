@@ -21,6 +21,7 @@ export const PRACTICE_SENTENCES = [
       "<h2>Let's try it together first!</h2>" +
       "<p>You'll see two words at a time. One belongs in the sentence — pick it!</p>" +
       "<p>Press <b>E</b> for the word on the left, <b>I</b> for the word on the right.</p>" +
+        `<p>If you see "---" that's not a real word, so pick the other word!</p>` +
       `<img src="${IMAGE_BASE_URL}keyboard_hand.jpg"` +
       ` alt="Hands on a keyboard with E and I highlighted" style="width:70%;max-height:40vh;display:block;margin:16px auto;">`,
     word_tips: [
@@ -43,6 +44,7 @@ export const PRACTICE_SENTENCES = [
     instruction:
       "<h2>Your turn!</h2>" +
       "<p>Now you try it — pick the words that fit the sentence.</p>" +
+              `<p>If you see "---" that's not a real word, so pick the other word!</p>` +
       "<p>If you need a hint, you can watch the sentence build up at the top as you go!</p>",
   },
   {

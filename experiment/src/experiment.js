@@ -125,7 +125,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // Instructions — progress bar already shows "learn-how" from createProgressBar()
   timeline.push({
     type: HtmlButtonResponsePlugin,
-    stimulus: INSTRUCTIONS,
+    stimulus: `<div class="instruction-slide">${INSTRUCTIONS}</div>`,
     choices: ["Continue"],
   });
 
@@ -135,7 +135,7 @@ export async function run({ assetPaths, input = {}, environment, title, version 
   // Buffer screen before first story
   timeline.push({
     type: HtmlButtonResponsePlugin,
-    stimulus: PRE_STORIES,
+    stimulus: `<div class="instruction-slide">${PRE_STORIES}</div>`,
     choices: ["Let's go!"],
     on_start: () => setSection("story-1"),
   });

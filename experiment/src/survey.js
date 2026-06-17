@@ -16,7 +16,8 @@ export function buildDebriefTrial() {
 export function buildExitSurvey() {
   return {
     type: SurveyTextPlugin,
-    preamble: "<h2>Before you go, we have a few quick questions!</h2> Your responses will help us make our next study better.",
+    preamble: "<h2>Before you go, we have a few quick questions!</h2> <p>Your responses will help us make our next study better.</p>"+
+    "<p><b>Parents:</b> You can help your child type answers to these questions. All questions are optional.</p>",
     questions: [
       {
         prompt: "Was there anything confusing or tricky?",
@@ -25,7 +26,7 @@ export function buildExitSurvey() {
       },
       {
         prompt: "How was the length of the study? Would you prefer one longer story or more shorter stories?",
-        rows: 2,
+        rows: 3,
         required: false,
       },
       {
@@ -72,7 +73,8 @@ export function buildParentDebrief() {
     "<p><b>Purpose: </b> This study was about when words are harder or easier to read, and how that might change as kids grow up. Adults take longer to read words that are less common (like porcupine) or that don't fit the context (like barked in 'The cat barked'). These patterns suggest that adults are building expectations about what the next word is as they read. We want to know if children are doing the same thing, and how this might change as they get older. so we're measuring how children's reading times vary based on how common or predictable words are. This is an early study using this task, and the results will also help us design studies for a wider range of ages. </p>" +
     "<p><b>What happened in the study: </b>In this study, your child read some sentences in a way where they saw two words at a time and picked which one continues the sentence. We use this because it slows down reading so we can carefully measure how long your child spent on each word. </p>" +
     "<p><b><i>This wasn't a test!</i></b> Sometimes sentences are harder and sometimes they are easier. We want to know when it was faster and easier to choose the right word and when it was harder. We're interested in when it takes children longer to find the right word because it helps us understand how their language and reading skills are developing, and how children's reading might be different than adults'. </p>" +
-    "<p><b>Compensation: </b>We'll email you a $5 Amazon gift card within one week to thank you for your time. To be eligible for compensation, (1) your child must be in the age range for this study, (2) you need to submit a valid consent video, and (3) your child must be visible in the consent recording. Each child is eligible for compensation only once.</p>" +
+    "<p> To learn more about what happens moment by moment as adults (and children) read, see  <a href='https://blog.donders.ru.nl/word-forecasts-how-your-brain-reads-into-the-future/?lang=en'>this blogpost from Donders University</a>."+ 
+    "<p><b>Compensation: </b>We'll email you a $5 US Amazon gift card within one week to thank you for your time. To be eligible for compensation, (1) your child must be in the age range for this study, (2) you need to submit a valid consent video, and (3) your child must be visible in the consent recording. Each child is eligible for compensation only once.</p>" +
     "<p>If you have questions, you can contact us via the Children Helping Science website.</p>";
   return {
     type: HtmlButtonResponsePlugin,
